@@ -110,9 +110,9 @@ const birthYear = ref(0);
       <div class="p-5">
         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Guess My Birth Year</h5>
         <input class="border-2 border-indigo-600" placeholder="Guess Year" type="text" v-model="birthYear">
-        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white text-red-600" v-if="birthYear>0 && birthYear<1983">Your Guessed Me as a Younger Person</h5>
+        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white text-red-600" v-if="birthYear>0 && birthYear<1983">You Guessed Me as an Older Person</h5>
         <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white text-green-500" v-else-if="birthYear==1983">Yes! Correct!</h5>
-        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white text-red-600" v-else-if="birthYear>1983">You Guessed Me as an Older Person</h5>
+        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white text-red-600" v-else-if="birthYear>1983">Your Guessed Me as a Younger Person</h5>
         <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white" v-else>Keep Guessing...</h5>
       </div>
     </div>
