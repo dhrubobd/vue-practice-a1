@@ -1,5 +1,8 @@
 <script setup>
+import { ref } from 'vue';
 import { person } from './data/data';
+const weather = ref(1);
+
 </script>
 
 <template>
@@ -57,6 +60,41 @@ import { person } from './data/data';
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
                 </svg>
             </a>
+        </div>
+    </div>
+  </section>
+
+  <hr class="m-5">
+
+
+  <!-- 
+    Weather Showing App
+  -->
+  <section class="p-5 text-center">
+    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <div class="flex mt-4 md:mt-6 p-5">
+            <button class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" type="button" @click="weather=1">Sunny</button>
+            <button class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" type="button" @click="weather=2">Cloudy</button>
+            <button class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" type="button" @click="weather=3">Rainy</button>
+            <button class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" type="button" @click="weather=4">Stormy</button>
+        </div>
+        <div class="p-5">
+          <div v-show="weather==1">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Weather is Sunny</h5>
+            <img src="./assets/images/sunny.png"  />
+          </div>
+          <div  v-show="weather==2">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Weather is Cloudy</h5>
+            <img src="./assets/images/cloudy.png"  />
+          </div>
+          <div v-show="weather==3">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Weather is Rainy</h5>
+            <img src="./assets/images/rainy.png"  />
+          </div>  
+          <div v-show="weather==4">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Weather is Stormy</h5>
+            <img src="./assets/images/stormy.png"  />
+          </div>
         </div>
     </div>
   </section>
