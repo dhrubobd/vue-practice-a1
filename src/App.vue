@@ -1,8 +1,11 @@
 <script setup>
 import { ref } from 'vue';
 import { person } from './data/data';
+//For Weather Showing App
 const weather = ref(1);
 
+// For Birth Year Guessing App
+const birthYear = ref(0);
 </script>
 
 <template>
@@ -64,11 +67,11 @@ const weather = ref(1);
     </div>
   </section>
 
-  <hr class="m-5">
+  <hr class="my-10">
 
 
   <!-- 
-    Weather Showing App
+    Weather Showing App (v-show practice)
   -->
   <section class="p-5 text-center">
     <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -98,7 +101,22 @@ const weather = ref(1);
         </div>
     </div>
   </section>
-
+  <hr class="my-10">
+  <!-- 
+    Birthyear Guessing App (For If Else Practice)
+  -->
+  <section class="p-5 text-center mx-auto">
+    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+      <div class="p-5">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Guess My Birth Year</h5>
+        <input class="border-2 border-indigo-600" placeholder="Guess Year" type="text" v-model="birthYear">
+        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white text-red-600" v-if="birthYear>0 && birthYear<1983">Your Guessed Me as a Younger Person</h5>
+        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white text-green-500" v-else-if="birthYear==1983">Yes! Correct!</h5>
+        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white text-red-600" v-else-if="birthYear>1983">You Guessed Me as an Older Person</h5>
+        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white" v-else>Keep Guessing...</h5>
+      </div>
+    </div>
+  </section>
 </template>
 
 <style scoped>
