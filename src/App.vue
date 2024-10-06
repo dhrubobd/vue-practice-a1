@@ -6,6 +6,56 @@ const weather = ref(1);
 
 // For Birth Year Guessing App
 const birthYear = ref(0);
+
+// Class Binding
+const textRed = 'text-red-600';
+
+const messageType = ref(0);
+const  inputWhite = 'bg-white-600';
+const  inputGreen = 'bg-green-600';
+const  inputRed = 'bg-red-600';
+
+// Class Binding With Birth Year Guessing
+
+const bYear = ref(0);
+const  normalHighlight = 'bg-white-600 text-black-600';
+const successHighlight = 'bg-green-600 text-white';
+const errorHighlight = 'bg-red-600 text-white';
+
+
+// Looping / List Rendering
+const items = [1,2,3,4,5,6];
+
+//Looping / List Rendering with index
+const toys = [
+  "Play Doe", "Puppets", "Toy Train", "Castel Making Toy", "Toy Cars", "Musical Toys"
+];
+
+// Tasks filtering App
+const tasks = [
+  {id:1, title:"Make ERD Diagram", tstatus:"completed" },
+  {id:2, title:"Website Design", tstatus:"ongoing" },
+  {id:3, title:"Making Components", tstatus:"ongoing" },
+  {id:4, title:"Meeting With Clients", tstatus:"completed" },
+  {id:5, title:"Technical Documentation", tstatus:"pending" },
+  {id:6, title:"Project Proposal Making", tstatus:"pending" },
+  {id:7, title:"Social Media Management", tstatus:"ongoing" },
+  {id:7, title:"Database Deisng", tstatus:"completed" },
+];
+
+const pendingBG = 'bg-red-600 text-white';
+const ongoingBG = 'bg-orange-600 text-white';
+const completedBG = 'bg-green-600 text-white';
+
+const taskFilter = ref('all');
+
+function getTasks(taskFilter){
+  if(taskFilter=='all'){
+    return tasks;
+  }
+  return tasks.filter(task=>taskFilter==task.tstatus);
+}
+
 </script>
 
 <template>
@@ -73,7 +123,7 @@ const birthYear = ref(0);
   <!-- 
     Weather Showing App (v-show practice)
   -->
-  <section class="p-5 text-center">
+  <section class="p-5 text-center flex items-center flex-col">
     <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <div class="flex mt-4 md:mt-6 p-5">
             <button class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" type="button" @click="weather=1">Sunny</button>
@@ -105,15 +155,88 @@ const birthYear = ref(0);
   <!-- 
     Birthyear Guessing App (For If Else Practice)
   -->
-  <section class="p-5 text-center mx-auto">
+  <section class="p-5 text-center flex items-center flex-col">
     <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
       <div class="p-5">
         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Guess My Birth Year</h5>
-        <input class="border-2 border-indigo-600" placeholder="Guess Year" type="text" v-model="birthYear">
-        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white text-red-600" v-if="birthYear>0 && birthYear<1983">You Guessed Me as an Older Person</h5>
-        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white text-green-500" v-else-if="birthYear==1983">Yes! Correct!</h5>
-        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white text-red-600" v-else-if="birthYear>1983">Your Guessed Me as a Younger Person</h5>
-        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white" v-else>Keep Guessing...</h5>
+
+        <input class="border-2 border-indigo-600 text-center" placeholder="Guess Year" type="text" v-model="birthYear">
+
+        <h5 class="mb-2 text-xl tracking-tight text-red-600" v-if="birthYear>0 && birthYear<1983">You Guessed Me as an Older Person</h5>
+        <h5 class="mb-2 text-xl tracking-tight text-green-500" v-else-if="birthYear==1983">Yes! Correct!</h5>
+        <h5 class="mb-2 text-xl tracking-tight text-red-600" v-else-if="birthYear>1983">Your Guessed Me as a Younger Person</h5>
+        <h5 class="mb-2 text-xl tracking-tight text-gray-900" v-else>Keep Guessing...</h5>
+      </div>
+    </div>
+  </section>
+  <hr class="my-10">
+  <!-- 
+    Class Binding
+  -->
+  <section class="p-5 text-center flex items-center flex-col">
+    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+      <div class="p-5">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight" :class="textRed">Class Binding Example</h5>
+        <input class="border-2 border-indigo-600 text-center" placeholder="Click on The Buttons Bellow" type="text" :class="messageType=='success'?inputGreen:messageType=='error'?inputRed:inputWhite">
+        <div class="flex mt-4 md:mt-6 p-5">
+            <button class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" type="button" @click="messageType='success'">Success</button>
+            <button class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" type="button" @click="messageType='error'">Error</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <hr class="my-10">
+  <!-- 
+    Class Binding With Birth Year Guessing
+  -->
+  <section class="p-5 text-center flex items-center flex-col">
+    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+      <div class="p-5">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Guess My Birth Year</h5>
+
+        <input class="border-2 border-indigo-600 text-center" placeholder="Guess Year" type="text" v-model="bYear" :class="bYear>0 && bYear<1983 ? errorHighlight
+        :bYear==1983 ? successHighlight : bYear>1983 ? errorHighlight : normalHighlight">
+        <h5 class="mb-2 text-xl tracking-tight text-gray-900" >Keep Guessing... You will get a Green Signal If You Findout my Birth Year</h5>
+      </div>
+    </div>
+  </section>
+  <hr class="my-10">
+  <!-- 
+    Looping / List Rendering
+  -->
+  <section class="grid grid-cols-3 gap-3">
+    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700" v-for="item in items">
+      <div class="p-5">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Box Number {{ item }}</h5>
+      </div>
+    </div>
+  </section>
+  <hr class="my-10">
+  <!-- 
+    Looping / List Rendering with index
+  -->
+  <section class="grid grid-cols-3 gap-3">
+    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700" v-for="(toy,index) in toys">
+      <div class="p-5">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Box Number {{ index+1 }} has {{ toy }}</h5>
+      </div>
+    </div>
+  </section>
+  <hr class="my-10">
+  <!-- 
+    Tasks Filtering App
+  -->
+  <section class="flex items-center flex-col">
+    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Filter Tasks</h5>
+    <div class="flex mt-4 md:mt-6 p-5">
+            <button class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" type="button" @click="taskFilter='all'">All</button>
+            <button class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" type="button" @click="taskFilter='pending'">Pending</button>
+            <button class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" type="button" @click="taskFilter='ongoing'">Ongoing</button>
+            <button class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" type="button" @click="taskFilter='completed'">Completed</button>
+    </div>
+    <div class="grid grid-cols-3 gap-3">
+      <div class="border border-gray-500 shadow p-5 my-2 ms-2 text-left text-lg" v-for="(task, index) in getTasks(taskFilter)" :key="index+1" :class="task.tstatus=='pending'? pendingBG : task.tstatus=='ongoing'? ongoingBG:completedBG">
+        {{ index+1 }}. {{ task.title }}
       </div>
     </div>
   </section>
