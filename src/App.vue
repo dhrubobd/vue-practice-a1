@@ -92,9 +92,9 @@ const weatherData = [
 ];
 
 const theWeatherData = reactive({
-    city: '',
-    weather: '',
-    temperature: ''
+    city: weatherData[0].city,
+    weather: weatherData[0].weather,
+    temperature: weatherData[0].temperature
   });
   const theIndex = 0;
 function changeWeatherReport(city,weather,temperature){
