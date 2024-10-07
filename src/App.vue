@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
 import { person } from './data/data';
 //For Weather Showing App
 const weather = ref(1);
@@ -40,7 +40,7 @@ const tasks = [
   {id:5, title:"Technical Documentation", tstatus:"pending" },
   {id:6, title:"Project Proposal Making", tstatus:"pending" },
   {id:7, title:"Social Media Management", tstatus:"ongoing" },
-  {id:7, title:"Database Deisng", tstatus:"completed" },
+  {id:7, title:"Database Desing", tstatus:"completed" },
 ];
 
 const pendingBG = 'bg-red-600 text-white';
@@ -54,6 +54,55 @@ function getTasks(taskFilter){
     return tasks;
   }
   return tasks.filter(task=>taskFilter==task.tstatus);
+}
+
+// City Weather
+
+const weatherData = [
+  {
+    city: 'Dhaka',
+    weather: 'cloudy',
+    temperature: '12'
+  },
+  {
+    city: 'Chittagong',
+    weather: 'sunny',
+    temperature: '18'
+  },
+  {
+    city: 'Comilla',
+    weather: 'rainy',
+    temperature: '16'
+  },
+  {
+    city: 'Barishal',
+    weather: 'sunny',
+    temperature: '19'
+  },
+  {
+    city: 'Sylhet',
+    weather: 'rainy',
+    temperature: '16'
+  },
+  {
+    city: 'Rajshahi',
+    weather: 'stormy',
+    temperature: '15'
+  }
+];
+
+const theWeatherData = reactive({
+    city: '',
+    weather: '',
+    temperature: ''
+  });
+  const theIndex = 0;
+function changeWeatherReport(city,weather,temperature){
+  
+  theWeatherData.city = city;
+  theWeatherData.weather = weather;
+  theWeatherData.temperature = temperature;
+  
 }
 
 </script>
@@ -240,6 +289,41 @@ function getTasks(taskFilter){
       </div>
     </div>
   </section>
+  <hr class="my-10">
+  <!-- 
+    City Weather
+  -->
+  <section class="p-5 text-center flex items-center flex-col">
+    <div class="max-w-[600px] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">City Weather</h5>
+        <div class="flex mt-4 md:mt-6 p-5">
+            <button class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" type="button" @click="changeWeatherReport(cityWeather.city, cityWeather.weather, cityWeather.temperature)" v-for="(cityWeather,index) in weatherData" :key="index+1">{{cityWeather.city}}</button>
+        </div>
+        <div class="p-5">
+          <div v-show="theWeatherData.weather == 'sunny'">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{theWeatherData.city}}: Sunny</h5>
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Temperature: {{theWeatherData.temperature}}°C</h5>
+            <img src="./assets/images/sunny.png"  />
+          </div>
+          <div  v-show="theWeatherData.weather == 'cloudy'">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{theWeatherData.city}}: Cloudy</h5>
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Temperature: {{theWeatherData.temperature}}°C</h5>
+            <img src="./assets/images/cloudy.png"  />
+          </div>
+          <div v-show="theWeatherData.weather == 'rainy'">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{theWeatherData.city}}: Rainy</h5>
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Temperature: {{theWeatherData.temperature}}°C</h5>
+            <img src="./assets/images/rainy.png"  />
+          </div>  
+          <div v-show="theWeatherData.weather == 'stormy'">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{theWeatherData.city}}: Stormy</h5>
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Temperature: {{theWeatherData.temperature}}°C</h5>
+            <img src="./assets/images/stormy.png"  />
+          </div>
+        </div>
+    </div>
+  </section>
+  <hr class="my-10">
 </template>
 
 <style scoped>

@@ -18,5 +18,4 @@ const person =[
       bio:'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eos quo, tenetur nesciunt repudiandae dicta esse ex nobis facere eveniet minima, veritatis iure aspernatur officiis saepe nulla aperiam autem corrupti assumenda.',
     }
   ];
-
   export {person}
