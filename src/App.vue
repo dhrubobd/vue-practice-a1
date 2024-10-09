@@ -105,6 +105,23 @@ function changeWeatherReport(city,weather,temperature){
   
 }
 
+// Accordion
+
+const accordionData = reactive([
+  {
+    question: 'What is Material Tailwind?',
+    answer: 'Material Tailwind is a framework that enhances Tailwind CSS with additional styles and components.',
+
+  },
+  {
+    question: 'How to use Material Tailwind?',
+    answer: 'You can use Material Tailwind by importing its components into your Tailwind CSS project.',
+
+  },
+
+]);
+const selectedIndex = ref(0);
+
 </script>
 
 <template>
@@ -324,6 +341,30 @@ function changeWeatherReport(city,weather,temperature){
     </div>
   </section>
   <hr class="my-10">
+
+  <!-- 
+    Accordion
+  -->
+  <section class="p-5 text-center flex items-center flex-col">
+    <div class="max-w-[600px] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Accordion</h5>
+      <div class="border-b border-slate-200" v-for="(accordion,index) in accordionData" :key="index">
+        <button  class="w-full flex justify-between items-center py-5 text-slate-800" @click="selectedIndex=index">
+          <span>{{ accordion.question }}</span>
+          <span  class="text-slate-800 transition-transform duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+              <path d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z" />
+            </svg>
+          </span>
+        </button>
+        <div class="transition-all duration-300 ease-in-out" v-show="index==selectedIndex">
+          <div class="p-5 text-sm text-slate-500 text-left">
+            {{ accordion.answer }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <style scoped>
