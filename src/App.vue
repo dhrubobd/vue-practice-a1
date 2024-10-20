@@ -122,6 +122,28 @@ const accordionData = reactive([
 ]);
 const selectedIndex = ref(0);
 
+// Quiz
+const countries =reactive([
+  {name: 'Bangladesh',capital:'Dhaka'},
+  {name: 'Canada',capital:'Ottowa'},
+  {name: 'Japan',capital:'Tokyo'},
+  {name: 'France',capital:'Paris'},
+]);
+
+const capitals = ["Ottowa","Dhaka","Paris", "Tokyo"];
+
+let submitted = ref(0);
+function getScore(){
+  let score = 0;
+  countries.forEach(country=>{
+    if(country.answer === country.capital){
+      score++;
+    }
+  });
+  return score;
+}
+
+
 </script>
 
 <template>
@@ -362,6 +384,29 @@ const selectedIndex = ref(0);
             {{ accordion.answer }}
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+  <!--
+    Quiz
+  -->
+  <section class="p-5 text-center flex items-center flex-col">
+    <div class="max-w-[600px] bg-white border border-gray-200 rounded-lg shadow p-5">
+      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Quiz</h5>
+      <!--
+      <div>{{ countries }}</div>
+      -->
+      <div class="border card text-xl text-white bg-black" v-show="submitted == 1">
+          Your Score: <span class="text-red-600">{{ getScore() }}</span> 
+      </div>
+      <template v-for="country in countries" :key="country.name">
+        <div class="text-left text-xl font-bold">What is the Capital of {{country.name}}?</div>
+        <template v-for="capital in capitals" :key="capital">
+          <input :name="country.name" type="radio" v-model="country.answer" :value="capital"  class="m-5 text-left"> <label for="" class="ml-2 mr-2">{{ capital }}</label> 
+        </template>
+      </template>
+      <div>
+        <button @click="submitted=1" type="button" class="border p-5 cursor-pointer">Submit</button>
       </div>
     </div>
   </section>
